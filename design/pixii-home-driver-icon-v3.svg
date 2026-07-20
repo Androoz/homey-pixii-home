@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" role="img" aria-labelledby="title desc">
+  <title id="title">Simple Pixii Home driver icon</title>
+  <desc id="desc">A simple solid icon of a tall Pixii battery cabinet viewed from the right side.</desc>
+
+  <!-- Solid cabinet faces. The SVG canvas is transparent; the cabinet is opaque. -->
+  <g fill="#fff" stroke="#fff" stroke-linejoin="round">
+    <path d="M190 154 635 138v670H190Z" stroke-width="18"/>
+    <path d="m635 138 137 45v625H635Z" stroke-width="18"/>
+    <path d="m184 128 454-16 142 43-8 28-137-45-445 16Z" stroke-width="18"/>
+  </g>
+
+  <!-- Only the defining product details. -->
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Lid, right-side corner and straight lower plinth. -->
+    <path d="m196 151 440-15 133 43" stroke-width="10"/>
+    <path d="M635 151v642" stroke-width="11"/>
+    <path d="M199 748h562" stroke-width="14"/>
+
+    <!-- Two restrained ventilation banks on the visible right side. -->
+    <g stroke-width="9">
+      <path d="m680 270 45 14M680 286l45 14M680 302l45 14M680 318l45 14M680 334l45 14M680 350l45 14M680 366l45 14"/>
+      <path d="m680 522 45 14M680 538l45 14M680 554l45 14M680 570l45 14M680 586l45 14M680 602l45 14M680 618l45 14"/>
+    </g>
+
+    <!-- Simple battery symbol retained on the front face. -->
+    <rect x="340" y="350" width="170" height="250" rx="10" stroke-width="17"/>
+    <path d="M399 330h52v20" stroke-width="17"/>
+    <path d="M377 530h96M377 475h96M377 420h96" stroke-width="14"/>
+  </g>
+</svg>

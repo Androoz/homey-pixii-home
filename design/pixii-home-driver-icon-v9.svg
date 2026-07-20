@@ -2,28 +2,37 @@
   <title id="title">Pixii Home cabinet with Pixii app battery symbol</title>
   <desc id="desc">A tall Pixii battery cabinet with a narrow left side, two ventilation grilles and Pixii's bracket-and-lightning battery symbol centered on the front.</desc>
 
-  <!-- Cabinet geometry: 40 px outer form, 20 px structural detail, 10 px minor detail. -->
+  <!-- Cabinet geometry from v8. -->
   <g transform="translate(960 0) scale(-1 1)">
+    <!-- OUTER FORM: 40 px. -->
     <g fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
       <path d="M180 135 620 115 780 165v610l-155 55-445-25Z"/>
     </g>
 
+    <!-- DETAIL: 20 px. Perspective edge and plinth division. -->
     <g fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
       <path d="M620 116v714"/>
       <path d="m185 715 435 20 150-53"/>
     </g>
 
+    <!-- MINOR DETAIL: 10 px. -->
     <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round">
       <path d="M680 286h42M680 302h42M680 318h42M680 334h42M680 350h42M680 366h42M680 382h42M680 398h42"/>
       <path d="M680 510h42M680 526h42M680 542h42M680 558h42M680 574h42M680 590h42M680 606h42M680 622h42"/>
     </g>
   </g>
 
-  <!-- Pixii battery symbol: all strokes are 20 px. -->
+  <!-- PIXII BATTERY SYMBOL: all strokes are 20 px. -->
+  <!-- The symbol's optical center is x=560, centered in the front panel. -->
   <g fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Open battery brackets. -->
     <path d="M490 400h-30q-20 0-20 20v100q0 20 20 20h30"/>
     <path d="M590 400h30q20 0 20 20v100q0 20-20 20h-30"/>
+
+    <!-- Central lightning mark. -->
     <path d="m560 390-65 80h55l-30 80 90-100h-50Z"/>
+
+    <!-- Small positive terminal from the Pixii app symbol. -->
     <path d="M680 462v20"/>
   </g>
 </svg>

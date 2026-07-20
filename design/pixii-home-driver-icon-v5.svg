@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" role="img" aria-labelledby="title desc">
+  <title id="title">Pixii Home cabinet angled to the right</title>
+  <desc id="desc">A simple outline icon of a tall Pixii battery cabinet with its right side visible, a battery symbol on the front and ventilation grilles on the side.</desc>
+
+  <!-- OUTLINE: 40 px. Main cabinet silhouette and right-side perspective. -->
+  <g fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 145 620 125 790 185v570l-170 60H170Z"/>
+    <path d="M620 125v690"/>
+  </g>
+
+  <!-- DETAIL: 20 px. Lid, straight plinth and battery symbol. -->
+  <g fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m178 185 440-20 162 57"/>
+    <path d="M180 730h438l162-55"/>
+
+    <rect x="310" y="330" width="190" height="280" rx="18"/>
+    <path d="M375 305h60v25"/>
+    <path d="M350 535h110M350 475h110M350 415h110"/>
+  </g>
+
+  <!-- MINOR DETAIL: 10 px. Two ventilation grilles on the visible right side. -->
+  <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round">
+    <path d="m670 270 66 23M670 286l66 23M670 302l66 23M670 318l66 23M670 334l66 23M670 350l66 23M670 366l66 23M670 382l66 23"/>
+    <path d="m670 510 66 23M670 526l66 23M670 542l66 23M670 558l66 23M670 574l66 23M670 590l66 23M670 606l66 23M670 622l66 23"/>
+  </g>
+</svg>
