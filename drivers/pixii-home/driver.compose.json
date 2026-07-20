@@ -4,7 +4,9 @@
   "platforms": ["local"],
   "connectivity": ["lan"],
   "energy": {
-    "homeBattery": true
+    "homeBattery": true,
+    "meterPowerImportedCapability": "meter_power",
+    "meterPowerExportedCapability": "meter_power.exported"
   },
   "images": {
     "small": "/drivers/pixii-home/assets/images/small.png",
@@ -15,6 +17,7 @@
     "measure_battery",
     "measure_power",
     "meter_power",
+    "meter_power.exported",
     "pixii_battery_energy",
     "pixii_house_power",
     "pixii_grid_power",
