@@ -1,0 +1,41 @@
+{
+  "name": { "en": "Pixii Home", "sv": "Pixii Home" },
+  "class": "battery",
+  "platforms": ["local"],
+  "connectivity": ["lan"],
+  "energy": {
+    "homeBattery": true
+  },
+  "images": {
+    "small": "/drivers/pixii-home/assets/images/small.png",
+    "large": "/drivers/pixii-home/assets/images/large.png",
+    "xlarge": "/drivers/pixii-home/assets/images/xlarge.png"
+  },
+  "capabilities": [
+    "measure_battery",
+    "measure_power",
+    "meter_power",
+    "pixii_battery_energy",
+    "pixii_house_power",
+    "pixii_grid_power",
+    "pixii_battery_soh",
+    "pixii_battery_temperature",
+    "pixii_service_text",
+    "pixii_service_details",
+    "pixii_system_status_text",
+    "pixii_system_status_details",
+    "pixii_system_events",
+    "pixii_mqtt_connected",
+    "pixii_last_ack"
+  ],
+  "pair": [
+    { "id": "connection" },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "options": { "singular": true },
+      "navigation": { "prev": "connection", "next": "add_devices" }
+    },
+    { "id": "add_devices", "template": "add_devices" }
+  ]
+}

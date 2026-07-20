@@ -1,0 +1,48 @@
+<style>
+  .pixii-form .homey-form-group,
+  .pixii-form .homey-form-input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+  }
+
+  .pixii-form .homey-form-input {
+    min-height: 48px;
+  }
+
+  .pixii-form .homey-form-checkbox-set {
+    border: 0;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+</style>
+<header class="homey-header"><h1 class="homey-title" data-i18n="pair.title"></h1><p class="homey-subtitle" data-i18n="pair.intro"></p></header>
+<form class="homey-form pixii-form" onsubmit="connect(event)">
+  <div class="homey-form-group"><label class="homey-form-label" data-i18n="pair.broker"></label><input class="homey-form-input" id="host" required placeholder="192.168.1.10"></div>
+  <div class="homey-form-group"><label class="homey-form-label" data-i18n="pair.port"></label><input class="homey-form-input" id="port" type="number" value="1883"></div>
+  <div class="homey-form-group"><label class="homey-form-label" data-i18n="pair.username"></label><input class="homey-form-input" id="username"></div>
+  <div class="homey-form-group"><label class="homey-form-label" data-i18n="pair.password"></label><input class="homey-form-input" id="password" type="password"></div>
+  <div class="homey-form-group"><label class="homey-form-label" data-i18n="pair.serial"></label><input class="homey-form-input" id="serial" required placeholder="242001002284"></div>
+  <fieldset class="homey-form-checkbox-set">
+    <label class="homey-form-checkbox">
+      <input class="homey-form-checkbox-input" id="tls" type="checkbox">
+      <span class="homey-form-checkbox-checkmark"></span>
+      <span class="homey-form-checkbox-text" data-i18n="pair.tls"></span>
+    </label>
+  </fieldset>
+  <button class="homey-button-primary-full" type="submit" data-i18n="pair.connect"></button>
+</form>
+<script>
+  function connect(event) {
+    event.preventDefault();
+    Homey.showLoadingOverlay();
+    Homey.emit('save_connection', {
+      host: document.getElementById('host').value,
+      port: Number(document.getElementById('port').value),
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value,
+      serial: document.getElementById('serial').value,
+      tls: document.getElementById('tls').checked
+    }).then(() => Homey.nextView()).catch(err => Homey.alert(err.message || err)).finally(() => Homey.hideLoadingOverlay());
+  }
+</script>

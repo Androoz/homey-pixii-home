@@ -1,0 +1,1 @@
+{ "type": "string", "title": { "en": "System status details", "sv": "Detaljer för systemstatus" }, "getable": true, "setable": false, "insights": false, "icon": "/assets/capabilities/system-status.svg" }

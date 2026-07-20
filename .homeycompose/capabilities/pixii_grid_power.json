@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "Grid power", "sv": "Näteffekt" }, "units": { "en": "W", "sv": "W" }, "decimals": 0, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/grid-power.svg" }

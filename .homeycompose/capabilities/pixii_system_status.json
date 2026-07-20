@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "System status", "sv": "Systemstatus" }, "decimals": 0, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/system-status.svg" }

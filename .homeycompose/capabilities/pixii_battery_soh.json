@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "Battery health", "sv": "Batterihälsa" }, "units": { "en": "%", "sv": "%" }, "min": 0, "max": 100, "decimals": 1, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/battery-health.svg" }

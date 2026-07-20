@@ -1,0 +1,21 @@
+[
+  { "id": "host", "type": "text", "label": { "en": "MQTT broker", "sv": "MQTT-broker" }, "value": "" },
+  { "id": "port", "type": "number", "label": { "en": "Port", "sv": "Port" }, "value": 1883, "min": 1, "max": 65535 },
+  { "id": "username", "type": "text", "label": { "en": "Username", "sv": "Användarnamn" }, "value": "" },
+  { "id": "password", "type": "password", "label": { "en": "Password", "sv": "Lösenord" }, "value": "" },
+  { "id": "serial", "type": "text", "label": { "en": "Gateway serial number", "sv": "Gateway-serienummer" }, "value": "" },
+  { "id": "tls", "type": "checkbox", "label": { "en": "Use TLS", "sv": "Använd TLS" }, "value": false },
+  { "id": "reject_unauthorized", "type": "checkbox", "label": { "en": "Verify TLS certificate", "sv": "Verifiera TLS-certifikat" }, "value": true },
+  { "id": "command_topic", "type": "text", "label": { "en": "Command topic", "sv": "Kommandotopic" }, "value": "" },
+  { "id": "availability_timeout", "type": "number", "label": { "en": "Status timeout (seconds)", "sv": "Statustimeout (sekunder)" }, "value": 120, "min": 30, "max": 3600 },
+  { "id": "soc_scale_usable", "type": "checkbox", "label": { "en": "Show SoC relative to the usable battery range", "sv": "Visa SoC relativt batteriets användbara intervall" }, "value": true },
+  { "id": "soc_custom_limits", "type": "checkbox", "label": { "en": "Override the automatic SoC limits", "sv": "Åsidosätt de automatiska SoC-gränserna" }, "value": false },
+  { "id": "soc_custom_min", "type": "number", "label": { "en": "Raw SoC shown as 0%", "sv": "Rå SoC som visas som 0 %" }, "value": 10, "min": 0, "max": 99, "step": 0.1 },
+  { "id": "soc_custom_max", "type": "number", "label": { "en": "Raw SoC shown as 100%", "sv": "Rå SoC som visas som 100 %" }, "value": 90, "min": 1, "max": 100, "step": 0.1 },
+  { "id": "dynamic_charge_max", "type": "number", "label": { "en": "Maximum dynamic charging power (W)", "sv": "Maximal dynamisk laddeffekt (W)" }, "value": 10000, "min": 100, "max": 100000 },
+  { "id": "dynamic_charge_deadband", "type": "number", "label": { "en": "Export deadband (W)", "sv": "Dödband för export (W)" }, "value": 100, "min": 0, "max": 5000 },
+  { "id": "dynamic_charge_lease", "type": "number", "label": { "en": "Dynamic command safety lease (seconds)", "sv": "Säkerhetstid för dynamiskt kommando (sekunder)" }, "value": 300, "min": 30, "max": 3600 },
+  { "id": "dynamic_discharge_max", "type": "number", "label": { "en": "Maximum dynamic discharging power (W)", "sv": "Maximal dynamisk urladdningseffekt (W)" }, "value": 10000, "min": 100, "max": 100000 },
+  { "id": "dynamic_discharge_deadband", "type": "number", "label": { "en": "Import deadband (W)", "sv": "Dödband för import (W)" }, "value": 100, "min": 0, "max": 5000 },
+  { "id": "dynamic_discharge_lease", "type": "number", "label": { "en": "Dynamic discharge safety lease (seconds)", "sv": "Säkerhetstid för dynamisk urladdning (sekunder)" }, "value": 300, "min": 30, "max": 3600 }
+]

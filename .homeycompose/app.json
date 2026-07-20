@@ -1,0 +1,26 @@
+{
+  "id": "com.pixii.home",
+  "version": "0.6.3",
+  "compatibility": ">=12.3.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": ["local"],
+  "name": { "en": "Pixii Home", "sv": "Pixii Home" },
+  "description": {
+    "en": "Local MQTT integration for Pixii Home battery systems.",
+    "sv": "Lokal MQTT-integration för Pixii Home-batterisystem."
+  },
+  "category": "energy",
+  "brandColor": "#000000",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "tags": {
+    "en": ["battery", "energy", "mqtt", "solar"],
+    "sv": ["batteri", "energi", "mqtt", "solenergi"]
+  },
+  "permissions": [],
+  "author": { "name": "Anders" }
+}

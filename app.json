@@ -1,0 +1,1248 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.pixii.home",
+  "version": "0.6.3",
+  "compatibility": ">=12.3.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Pixii Home",
+    "sv": "Pixii Home"
+  },
+  "description": {
+    "en": "Local MQTT integration for Pixii Home battery systems.",
+    "sv": "Lokal MQTT-integration för Pixii Home-batterisystem."
+  },
+  "category": "energy",
+  "brandColor": "#000000",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "tags": {
+    "en": [
+      "battery",
+      "energy",
+      "mqtt",
+      "solar"
+    ],
+    "sv": [
+      "batteri",
+      "energi",
+      "mqtt",
+      "solenergi"
+    ]
+  },
+  "permissions": [],
+  "author": {
+    "name": "Anders"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "battery_level_changed",
+        "title": {
+          "en": "The battery level changed",
+          "sv": "Batterinivån ändrades"
+        },
+        "tokens": [
+          {
+            "name": "level",
+            "type": "number",
+            "title": {
+              "en": "Battery level (%)",
+              "sv": "Batterinivå (%)"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "battery_became_full",
+        "title": {
+          "en": "The battery became fully charged",
+          "sv": "Batteriet blev fulladdat"
+        },
+        "tokens": [
+          {
+            "name": "level",
+            "type": "number",
+            "title": {
+              "en": "Battery level (%)",
+              "sv": "Batterinivå (%)"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "battery_started_charging",
+        "title": {
+          "en": "The battery started charging",
+          "sv": "Batteriet började laddas"
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Battery power (W)",
+              "sv": "Batterieffekt (W)"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "battery_started_discharging",
+        "title": {
+          "en": "The battery started discharging",
+          "sv": "Batteriet började laddas ur"
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Battery power (W)",
+              "sv": "Batterieffekt (W)"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "battery_became_idle",
+        "title": {
+          "en": "The battery stopped charging or discharging",
+          "sv": "Batteriet slutade ladda eller ladda ur"
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Battery power (W)",
+              "sv": "Batterieffekt (W)"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "active_service_changed",
+        "title": {
+          "en": "The active battery service changed",
+          "sv": "Den aktiva batteritjänsten ändrades"
+        },
+        "tokens": [
+          {
+            "name": "service",
+            "type": "string",
+            "title": {
+              "en": "Active service",
+              "sv": "Aktiv tjänst"
+            }
+          },
+          {
+            "name": "code",
+            "type": "number",
+            "title": {
+              "en": "Service code",
+              "sv": "Tjänstekod"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "system_status_changed",
+        "title": {
+          "en": "The system status changed",
+          "sv": "Systemstatusen ändrades"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "System status",
+              "sv": "Systemstatus"
+            }
+          },
+          {
+            "name": "code",
+            "type": "number",
+            "title": {
+              "en": "Status code",
+              "sv": "Statuskod"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "mqtt_connection_restored",
+        "title": {
+          "en": "The connection to Pixii was restored",
+          "sv": "Anslutningen till Pixii återställdes"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "mqtt_connection_lost",
+        "title": {
+          "en": "The connection to Pixii was lost",
+          "sv": "Anslutningen till Pixii bröts"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "command_succeeded",
+        "title": {
+          "en": "A command was accepted",
+          "sv": "Ett kommando accepterades"
+        },
+        "tokens": [
+          {
+            "name": "service",
+            "type": "string",
+            "title": {
+              "en": "Service",
+              "sv": "Tjänst"
+            }
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Response",
+              "sv": "Svar"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "command_failed",
+        "title": {
+          "en": "A command was rejected",
+          "sv": "Ett kommando avvisades"
+        },
+        "tokens": [
+          {
+            "name": "service",
+            "type": "string",
+            "title": {
+              "en": "Service",
+              "sv": "Tjänst"
+            }
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Error",
+              "sv": "Fel"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "soc_above",
+        "title": {
+          "en": "The battery level is above [[soc]]%",
+          "sv": "Batterinivån är över [[soc]] %"
+        },
+        "titleFormatted": {
+          "en": "The battery level is above [[soc]]%",
+          "sv": "Batterinivån är över [[soc]] %"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "soc",
+            "type": "number",
+            "title": {
+              "en": "Battery level (%)",
+              "sv": "Batterinivå (%)"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "soc_below",
+        "title": {
+          "en": "The battery level is below [[soc]]%",
+          "sv": "Batterinivån är under [[soc]] %"
+        },
+        "titleFormatted": {
+          "en": "The battery level is below [[soc]]%",
+          "sv": "Batterinivån är under [[soc]] %"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "soc",
+            "type": "number",
+            "title": {
+              "en": "Battery level (%)",
+              "sv": "Batterinivå (%)"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "mqtt_connected",
+        "title": {
+          "en": "Pixii is connected",
+          "sv": "Pixii är ansluten"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "stop_charging",
+        "title": {
+          "en": "Stop charging",
+          "sv": "Stoppa laddning"
+        },
+        "titleFormatted": {
+          "en": "Stop charging",
+          "sv": "Stoppa laddning"
+        },
+        "hint": {
+          "en": "Requests 0 W for the configured charging safety lease. Trigger again to extend the stop.",
+          "sv": "Begär 0 W under den inställda säkerhetstiden för laddning. Trigga igen för att förlänga stoppet."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "stop_discharging",
+        "title": {
+          "en": "Stop discharging",
+          "sv": "Stoppa urladdning"
+        },
+        "titleFormatted": {
+          "en": "Stop discharging",
+          "sv": "Stoppa urladdning"
+        },
+        "hint": {
+          "en": "Requests 0 W for the configured discharging safety lease. Trigger again to extend the stop.",
+          "sv": "Begär 0 W under den inställda säkerhetstiden för urladdning. Trigga igen för att förlänga stoppet."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "dynamic_charge_from_grid_power",
+        "title": {
+          "en": "Follow grid power [[grid_power]] W for dynamic charging",
+          "sv": "Följ näteffekt [[grid_power]] W för dynamisk laddning"
+        },
+        "titleFormatted": {
+          "en": "Follow grid power [[grid_power]] W for dynamic charging",
+          "sv": "Följ näteffekt [[grid_power]] W för dynamisk laddning"
+        },
+        "hint": {
+          "en": "Use the Grid power Flow tag. A negative value is export and becomes an equally large positive charging command. At zero or import, charging is stopped. Trigger this card whenever grid power updates.",
+          "sv": "Använd Flow-taggen Näteffekt. Ett negativt värde är export och blir ett lika stort positivt laddkommando. Vid noll eller import stoppas laddningen. Trigga kortet varje gång näteffekten uppdateras."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "grid_power",
+            "type": "number",
+            "title": {
+              "en": "Grid power (W)",
+              "sv": "Näteffekt (W)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dynamic_discharge_from_grid_power",
+        "title": {
+          "en": "Follow grid power [[grid_power]] W for dynamic discharging",
+          "sv": "Följ näteffekt [[grid_power]] W för dynamisk urladdning"
+        },
+        "titleFormatted": {
+          "en": "Follow grid power [[grid_power]] W for dynamic discharging",
+          "sv": "Följ näteffekt [[grid_power]] W för dynamisk urladdning"
+        },
+        "hint": {
+          "en": "Use the Grid power Flow tag. A positive value is import and becomes an equally large negative discharging command, targeting approximately 0 W grid power. At zero or export, discharging is stopped. Trigger this card whenever grid power updates.",
+          "sv": "Använd Flow-taggen Näteffekt. Ett positivt värde är import och blir ett lika stort negativt urladdningskommando, med cirka 0 W näteffekt som mål. Vid noll eller export stoppas urladdningen. Trigga kortet varje gång näteffekten uppdateras."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "grid_power",
+            "type": "number",
+            "title": {
+              "en": "Grid power (W)",
+              "sv": "Näteffekt (W)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "charge_battery",
+        "title": {
+          "en": "Charge the battery with [[power]] W for [[duration]] minutes",
+          "sv": "Ladda batteriet med [[power]] W i [[duration]] minuter"
+        },
+        "titleFormatted": {
+          "en": "Charge the battery with [[power]] W for [[duration]] minutes",
+          "sv": "Ladda batteriet med [[power]] W i [[duration]] minuter"
+        },
+        "hint": {
+          "en": "Uses Pixii Demand Response with a positive power value.",
+          "sv": "Använder Pixii Demand Response med ett positivt effektvärde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Charging power (W)",
+              "sv": "Laddeffekt (W)"
+            },
+            "min": 100,
+            "max": 10000,
+            "step": 100
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "title": {
+              "en": "Duration (minutes)",
+              "sv": "Tid (minuter)"
+            },
+            "min": 1,
+            "max": 1440,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "discharge_battery",
+        "title": {
+          "en": "Discharge the battery with [[power]] W for [[duration]] minutes",
+          "sv": "Ladda ur batteriet med [[power]] W i [[duration]] minuter"
+        },
+        "titleFormatted": {
+          "en": "Discharge the battery with [[power]] W for [[duration]] minutes",
+          "sv": "Ladda ur batteriet med [[power]] W i [[duration]] minuter"
+        },
+        "hint": {
+          "en": "Uses Pixii Demand Response. Enter power as a positive number; the app applies the discharge sign.",
+          "sv": "Använder Pixii Demand Response. Ange effekten som ett positivt tal; appen sätter rätt tecken för urladdning."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Discharging power (W)",
+              "sv": "Urladdningseffekt (W)"
+            },
+            "min": 100,
+            "max": 10000,
+            "step": 100
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "title": {
+              "en": "Duration (minutes)",
+              "sv": "Tid (minuter)"
+            },
+            "min": 1,
+            "max": 1440,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "hold_battery",
+        "title": {
+          "en": "Hold the battery at 0 W for [[duration]] minutes",
+          "sv": "Håll batteriet på 0 W i [[duration]] minuter"
+        },
+        "titleFormatted": {
+          "en": "Hold the battery at 0 W for [[duration]] minutes",
+          "sv": "Håll batteriet på 0 W i [[duration]] minuter"
+        },
+        "hint": {
+          "en": "Temporarily prevents commanded charging and discharging by requesting 0 W.",
+          "sv": "Begär tillfälligt 0 W och stoppar därmed beordrad laddning eller urladdning."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "title": {
+              "en": "Duration (minutes)",
+              "sv": "Tid (minuter)"
+            },
+            "min": 1,
+            "max": 1440,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "charge_to_soc",
+        "title": {
+          "en": "Charge to [[soc]]% SoC",
+          "sv": "Ladda till [[soc]] % SoC"
+        },
+        "titleFormatted": {
+          "en": "Charge to [[soc]]% SoC",
+          "sv": "Ladda till [[soc]] % SoC"
+        },
+        "hint": {
+          "en": "Uses Pixii Target SoC. Pixii determines the charging power.",
+          "sv": "Använder Pixii Target SoC. Pixii bestämmer laddeffekten."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "soc",
+            "type": "number",
+            "title": {
+              "en": "Target SoC (%)",
+              "sv": "Mål-SoC (%)"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "demand_response",
+        "deprecated": true,
+        "title": {
+          "en": "Set active power to [[power]] W for [[duration]] seconds",
+          "sv": "Sätt aktiv effekt till [[power]] W i [[duration]] sekunder"
+        },
+        "titleFormatted": {
+          "en": "Set active power to [[power]] W for [[duration]] seconds",
+          "sv": "Sätt aktiv effekt till [[power]] W i [[duration]] sekunder"
+        },
+        "hint": {
+          "en": "Negative power discharges; positive power charges.",
+          "sv": "Negativ effekt urladdar; positiv effekt laddar."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "power",
+            "type": "number",
+            "min": -1000000,
+            "max": 1000000,
+            "step": 100
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "min": 1,
+            "max": 86400,
+            "step": 60
+          }
+        ]
+      },
+      {
+        "id": "target_soc",
+        "deprecated": true,
+        "title": {
+          "en": "Set target SoC to [[soc]]% for [[duration]] seconds",
+          "sv": "Sätt mål-SoC till [[soc]] % i [[duration]] sekunder"
+        },
+        "titleFormatted": {
+          "en": "Set target SoC to [[soc]]% for [[duration]] seconds",
+          "sv": "Sätt mål-SoC till [[soc]] % i [[duration]] sekunder"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "soc",
+            "type": "number",
+            "min": 0,
+            "max": 100,
+            "step": 1
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "min": 0,
+            "max": 86400,
+            "step": 60
+          }
+        ]
+      },
+      {
+        "id": "power_control",
+        "deprecated": true,
+        "title": {
+          "en": "Run Power Control at [[power]] W and [[reactive]]% reactive for [[duration]] seconds",
+          "sv": "Kör Power Control med [[power]] W och [[reactive]] % reaktivt i [[duration]] sekunder"
+        },
+        "titleFormatted": {
+          "en": "Run Power Control at [[power]] W and [[reactive]]% reactive for [[duration]] seconds",
+          "sv": "Kör Power Control med [[power]] W och [[reactive]] % reaktivt i [[duration]] sekunder"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "power",
+            "type": "number",
+            "min": -1000000,
+            "max": 1000000,
+            "step": 100
+          },
+          {
+            "name": "reactive",
+            "type": "number",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "min": 1,
+            "max": 86400,
+            "step": 60
+          }
+        ]
+      },
+      {
+        "id": "stop_control",
+        "deprecated": true,
+        "title": {
+          "en": "Stop active power control",
+          "sv": "Stoppa aktiv effektstyrning"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          }
+        ]
+      },
+      {
+        "id": "publish_service",
+        "deprecated": true,
+        "title": {
+          "en": "Publish raw Pixii service JSON [[payload]]",
+          "sv": "Publicera rå Pixii service-JSON [[payload]]"
+        },
+        "titleFormatted": {
+          "en": "Publish raw Pixii service JSON [[payload]]",
+          "sv": "Publicera rå Pixii service-JSON [[payload]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=pixii-home"
+          },
+          {
+            "name": "payload",
+            "type": "text",
+            "multiline": true
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Pixii Home",
+        "sv": "Pixii Home"
+      },
+      "class": "battery",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "energy": {
+        "homeBattery": true
+      },
+      "images": {
+        "small": "/drivers/pixii-home/assets/images/small.png",
+        "large": "/drivers/pixii-home/assets/images/large.png",
+        "xlarge": "/drivers/pixii-home/assets/images/xlarge.png"
+      },
+      "capabilities": [
+        "measure_battery",
+        "measure_power",
+        "meter_power",
+        "pixii_battery_energy",
+        "pixii_house_power",
+        "pixii_grid_power",
+        "pixii_battery_soh",
+        "pixii_battery_temperature",
+        "pixii_service_text",
+        "pixii_service_details",
+        "pixii_system_status_text",
+        "pixii_system_status_details",
+        "pixii_system_events",
+        "pixii_mqtt_connected",
+        "pixii_last_ack"
+      ],
+      "pair": [
+        {
+          "id": "connection"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "prev": "connection",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "pixii-home",
+      "settings": [
+        {
+          "id": "host",
+          "type": "text",
+          "label": {
+            "en": "MQTT broker",
+            "sv": "MQTT-broker"
+          },
+          "value": ""
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": {
+            "en": "Port",
+            "sv": "Port"
+          },
+          "value": 1883,
+          "min": 1,
+          "max": 65535
+        },
+        {
+          "id": "username",
+          "type": "text",
+          "label": {
+            "en": "Username",
+            "sv": "Användarnamn"
+          },
+          "value": ""
+        },
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Password",
+            "sv": "Lösenord"
+          },
+          "value": ""
+        },
+        {
+          "id": "serial",
+          "type": "text",
+          "label": {
+            "en": "Gateway serial number",
+            "sv": "Gateway-serienummer"
+          },
+          "value": ""
+        },
+        {
+          "id": "tls",
+          "type": "checkbox",
+          "label": {
+            "en": "Use TLS",
+            "sv": "Använd TLS"
+          },
+          "value": false
+        },
+        {
+          "id": "reject_unauthorized",
+          "type": "checkbox",
+          "label": {
+            "en": "Verify TLS certificate",
+            "sv": "Verifiera TLS-certifikat"
+          },
+          "value": true
+        },
+        {
+          "id": "command_topic",
+          "type": "text",
+          "label": {
+            "en": "Command topic",
+            "sv": "Kommandotopic"
+          },
+          "value": ""
+        },
+        {
+          "id": "availability_timeout",
+          "type": "number",
+          "label": {
+            "en": "Status timeout (seconds)",
+            "sv": "Statustimeout (sekunder)"
+          },
+          "value": 120,
+          "min": 30,
+          "max": 3600
+        },
+        {
+          "id": "soc_scale_usable",
+          "type": "checkbox",
+          "label": {
+            "en": "Show SoC relative to the usable battery range",
+            "sv": "Visa SoC relativt batteriets användbara intervall"
+          },
+          "value": true
+        },
+        {
+          "id": "soc_custom_limits",
+          "type": "checkbox",
+          "label": {
+            "en": "Override the automatic SoC limits",
+            "sv": "Åsidosätt de automatiska SoC-gränserna"
+          },
+          "value": false
+        },
+        {
+          "id": "soc_custom_min",
+          "type": "number",
+          "label": {
+            "en": "Raw SoC shown as 0%",
+            "sv": "Rå SoC som visas som 0 %"
+          },
+          "value": 10,
+          "min": 0,
+          "max": 99,
+          "step": 0.1
+        },
+        {
+          "id": "soc_custom_max",
+          "type": "number",
+          "label": {
+            "en": "Raw SoC shown as 100%",
+            "sv": "Rå SoC som visas som 100 %"
+          },
+          "value": 90,
+          "min": 1,
+          "max": 100,
+          "step": 0.1
+        },
+        {
+          "id": "dynamic_charge_max",
+          "type": "number",
+          "label": {
+            "en": "Maximum dynamic charging power (W)",
+            "sv": "Maximal dynamisk laddeffekt (W)"
+          },
+          "value": 10000,
+          "min": 100,
+          "max": 100000
+        },
+        {
+          "id": "dynamic_charge_deadband",
+          "type": "number",
+          "label": {
+            "en": "Export deadband (W)",
+            "sv": "Dödband för export (W)"
+          },
+          "value": 100,
+          "min": 0,
+          "max": 5000
+        },
+        {
+          "id": "dynamic_charge_lease",
+          "type": "number",
+          "label": {
+            "en": "Dynamic command safety lease (seconds)",
+            "sv": "Säkerhetstid för dynamiskt kommando (sekunder)"
+          },
+          "value": 300,
+          "min": 30,
+          "max": 3600
+        },
+        {
+          "id": "dynamic_discharge_max",
+          "type": "number",
+          "label": {
+            "en": "Maximum dynamic discharging power (W)",
+            "sv": "Maximal dynamisk urladdningseffekt (W)"
+          },
+          "value": 10000,
+          "min": 100,
+          "max": 100000
+        },
+        {
+          "id": "dynamic_discharge_deadband",
+          "type": "number",
+          "label": {
+            "en": "Import deadband (W)",
+            "sv": "Dödband för import (W)"
+          },
+          "value": 100,
+          "min": 0,
+          "max": 5000
+        },
+        {
+          "id": "dynamic_discharge_lease",
+          "type": "number",
+          "label": {
+            "en": "Dynamic discharge safety lease (seconds)",
+            "sv": "Säkerhetstid för dynamisk urladdning (sekunder)"
+          },
+          "value": 300,
+          "min": 30,
+          "max": 3600
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "pixii_battery_energy": {
+      "type": "number",
+      "title": {
+        "en": "Stored energy",
+        "sv": "Lagrad energi"
+      },
+      "units": {
+        "en": "kWh",
+        "sv": "kWh"
+      },
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/stored-energy.svg"
+    },
+    "pixii_battery_soh": {
+      "type": "number",
+      "title": {
+        "en": "Battery health",
+        "sv": "Batterihälsa"
+      },
+      "units": {
+        "en": "%",
+        "sv": "%"
+      },
+      "min": 0,
+      "max": 100,
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/battery-health.svg"
+    },
+    "pixii_battery_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Battery temperature",
+        "sv": "Batteritemperatur"
+      },
+      "units": {
+        "en": "°C",
+        "sv": "°C"
+      },
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/temperature.svg"
+    },
+    "pixii_grid_power": {
+      "type": "number",
+      "title": {
+        "en": "Grid power",
+        "sv": "Näteffekt"
+      },
+      "units": {
+        "en": "W",
+        "sv": "W"
+      },
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/grid-power.svg"
+    },
+    "pixii_house_power": {
+      "type": "number",
+      "title": {
+        "en": "House power",
+        "sv": "Huseffekt"
+      },
+      "units": {
+        "en": "W",
+        "sv": "W"
+      },
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/house-power.svg"
+    },
+    "pixii_last_ack": {
+      "type": "string",
+      "title": {
+        "en": "Last command response",
+        "sv": "Senaste kommandosvar"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/ack.svg"
+    },
+    "pixii_mqtt_connected": {
+      "type": "boolean",
+      "title": {
+        "en": "MQTT connected",
+        "sv": "MQTT ansluten"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/mqtt.svg"
+    },
+    "pixii_service": {
+      "type": "number",
+      "title": {
+        "en": "Active service",
+        "sv": "Aktiv tjänst"
+      },
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/service.svg"
+    },
+    "pixii_service_details": {
+      "type": "string",
+      "title": {
+        "en": "Active service details",
+        "sv": "Detaljer för aktiv tjänst"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/service.svg"
+    },
+    "pixii_service_text": {
+      "type": "string",
+      "title": {
+        "en": "Active service",
+        "sv": "Aktiv tjänst"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/service.svg"
+    },
+    "pixii_system_events": {
+      "type": "string",
+      "title": {
+        "en": "System events",
+        "sv": "Systemhändelser"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/system-status.svg"
+    },
+    "pixii_system_status": {
+      "type": "number",
+      "title": {
+        "en": "System status",
+        "sv": "Systemstatus"
+      },
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/system-status.svg"
+    },
+    "pixii_system_status_details": {
+      "type": "string",
+      "title": {
+        "en": "System status details",
+        "sv": "Detaljer för systemstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/system-status.svg"
+    },
+    "pixii_system_status_text": {
+      "type": "string",
+      "title": {
+        "en": "System status",
+        "sv": "Systemstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "icon": "/assets/capabilities/system-status.svg"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{ "type": "boolean", "title": { "en": "MQTT connected", "sv": "MQTT ansluten" }, "getable": true, "setable": false, "insights": false, "icon": "/assets/capabilities/mqtt.svg" }

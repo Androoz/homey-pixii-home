@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "Stored energy", "sv": "Lagrad energi" }, "units": { "en": "kWh", "sv": "kWh" }, "decimals": 2, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/stored-energy.svg" }

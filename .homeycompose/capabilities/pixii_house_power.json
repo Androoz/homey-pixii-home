@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "House power", "sv": "Huseffekt" }, "units": { "en": "W", "sv": "W" }, "decimals": 0, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/house-power.svg" }
