@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" role="img" aria-labelledby="title desc">
+  <title id="title">Pixii Home cabinet based on the product silhouette</title>
+  <desc id="desc">A tall Pixii battery cabinet with a broad front, narrow right side, straight plinth and two ventilation grilles.</desc>
+
+  <!-- OUTER FORM: 40 px. Tall product silhouette from the supplied photo. -->
+  <g fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180 135 620 115 780 165v610l-155 55-445-25Z"/>
+  </g>
+
+  <!-- DETAIL: 20 px. Perspective edge, lid, plinth division and battery symbol. -->
+  <g fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Front-to-side corner. -->
+    <path d="M620 116v714"/>
+
+    <!-- Thin raised lid follows the real cabinet. -->
+    <path d="m185 172 434-19 151 47"/>
+
+    <!-- Plinth division: nearly level across the front, receding on the right side. -->
+    <path d="m185 715 435 20 150-53"/>
+
+    <!-- Battery symbol retained as the primary front-face detail. -->
+    <rect x="305" y="330" width="190" height="280" rx="18"/>
+    <path d="M370 305h60v25"/>
+    <path d="M345 535h110M345 475h110M345 415h110"/>
+  </g>
+
+  <!-- MINOR DETAIL: 10 px. Two slim ventilation grilles on the right side. -->
+  <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round">
+    <path d="m670 270 61 19M670 286l61 19M670 302l61 19M670 318l61 19M670 334l61 19M670 350l61 19M670 366l61 19M670 382l61 19"/>
+    <path d="m670 510 61 19M670 526l61 19M670 542l61 19M670 558l61 19M670 574l61 19M670 590l61 19M670 606l61 19M670 622l61 19"/>
+  </g>
+</svg>

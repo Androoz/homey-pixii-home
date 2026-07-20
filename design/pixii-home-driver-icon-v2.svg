@@ -2,37 +2,40 @@
   <title id="title">Pixii Home driver icon</title>
   <desc id="desc">A detailed line icon of a tall Pixii Home battery cabinet, turned to the right with its left side visible and a battery symbol on the front.</desc>
 
-  <!-- Main cabinet: front turned right, opposite the supplied product-photo angle. -->
-  <g transform="translate(86 -10) scale(.82 1.08)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M268 105 790 142v665l-522-29Z" stroke-width="22"/>
-    <path d="m132 174 136-69v673l-136-60Z" stroke-width="22"/>
-    <path d="m132 174 136-69 522 37-139 67Z" stroke-width="22"/>
-
-    <!-- Thin lid and front-door seams from the real enclosure. -->
-    <path d="m137 153 130-65 528 37-5 17-522-37-136 69Z" stroke-width="12"/>
-    <path d="m285 139 487 35v599l-487-27Z" stroke-width="10" opacity=".9"/>
-    <path d="M290 159 765 193M290 723l475 27" stroke-width="8" opacity=".75"/>
-
-    <!-- Side panel seams, fasteners and the two ventilation banks. -->
-    <path d="M151 196v500M246 129v628" stroke-width="8" opacity=".7"/>
-    <g stroke-width="9">
-      <path d="m167 268 52-23M167 282l52-23M167 296l52-23M167 310l52-23M167 324l52-23M167 338l52-23M167 352l52-23M167 366l52-23"/>
-      <path d="m167 520 52-23M167 534l52-23M167 548l52-23M167 562l52-23M167 576l52-23M167 590l52-23M167 604l52-23M167 618l52-23"/>
+  <!-- Closed cabinet faces: opaque device silhouette on a transparent canvas. -->
+  <g transform="translate(86 -10) scale(.82 1.08)" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="#fff" stroke="#fff" stroke-width="22">
+      <path d="M132 174 268 105V807H132Z"/>
+      <path d="M268 105 790 142V807H268Z"/>
+      <path d="m132 174 136-69 522 37-139 67Z"/>
     </g>
-    <g fill="#fff" stroke="none">
+
+    <!-- Dark product details sit on top of the solid faces. -->
+    <g fill="none" stroke="#000">
+      <path d="m142 158 126-62 514 36" stroke-width="9"/>
+      <path d="m285 139 487 35v606H285Z" stroke-width="9" opacity=".88"/>
+      <path d="M290 163 765 196M290 720h475" stroke-width="7" opacity=".72"/>
+      <path d="M151 196v545M246 129v628" stroke-width="7" opacity=".72"/>
+
+      <!-- Side ventilation banks. -->
+      <g stroke-width="9">
+        <path d="m167 268 52-23M167 282l52-23M167 296l52-23M167 310l52-23M167 324l52-23M167 338l52-23M167 352l52-23M167 366l52-23"/>
+        <path d="m167 520 52-23M167 534l52-23M167 548l52-23M167 562l52-23M167 576l52-23M167 590l52-23M167 604l52-23M167 618l52-23"/>
+      </g>
+
+      <!-- Battery symbol retained on the front door. -->
+      <path d="m404 335 209 15v267l-209-12Z" stroke-width="20"/>
+      <path d="m480 321 67 5v18" stroke-width="20"/>
+      <path d="m446 545 126 7M446 487l126 8M446 429l126 9" stroke-width="18"/>
+
+      <!-- Straight base with no feet or rearward angle. -->
+      <path d="M132 720H790M268 720v87" stroke-width="14"/>
+    </g>
+
+    <g fill="#000" stroke="none">
       <circle cx="232" cy="220" r="6"/>
       <circle cx="232" cy="447" r="6"/>
       <circle cx="232" cy="680" r="6"/>
     </g>
-
-    <!-- Recognisable battery symbol retained on the front door. -->
-    <path d="m404 335 209 15v267l-209-12Z" stroke-width="20"/>
-    <path d="m480 321 67 5v18" stroke-width="20"/>
-    <path d="m446 545 126 7M446 487l126 8M446 429l126 9" stroke-width="18"/>
-
-    <!-- Black plinth represented as a strong outlined base, including feet. -->
-    <path d="m132 670 136 55 522 28v54l-522-29-136-60Z" stroke-width="22"/>
-    <path d="M159 730v45l57 25M310 780v42M739 804v38" stroke-width="20"/>
-    <path d="M295 822h62M724 842h58" stroke-width="18"/>
   </g>
 </svg>

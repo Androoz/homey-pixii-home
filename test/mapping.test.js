@@ -16,3 +16,13 @@ test('maps meter telemetry', () => {
     { capability: 'pixii_grid_power', value: -500 }
   ]);
 });
+
+test('maps Pixii charged and discharged energy counters for Homey', () => {
+  assert.deepEqual(mapPayload('pixii/status/242001002284/energy', {
+    ess_kwh_imp: 1775.45,
+    ess_kwh_exp: -1446.95
+  }), [
+    { capability: 'meter_power', value: 1775.45 },
+    { capability: 'meter_power.exported', value: 1446.95 }
+  ]);
+});

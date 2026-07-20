@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" role="img" aria-labelledby="title desc">
+  <title id="title">Pixii Home cabinet with angled right side</title>
+  <desc id="desc">A simple solid battery cabinet icon with a dominant front face and a narrow angled right side.</desc>
+
+  <!-- Narrow angled right side, inspired by the supplied reference symbol. -->
+  <path
+    d="M604 112 716 142Q742 146 742 176V766Q742 796 715 800L604 832Z"
+    fill="#fff"
+    stroke="#fff"
+    stroke-width="20"
+    stroke-linejoin="round"
+  />
+
+  <!-- Large, simple front face. -->
+  <path
+    d="M255 126Q255 96 288 94L590 106Q624 108 624 143V798Q624 832 590 834L289 846Q255 846 255 811Z"
+    fill="#fff"
+    stroke="#fff"
+    stroke-width="20"
+    stroke-linejoin="round"
+  />
+
+  <!-- Perspective seam and battery symbol. -->
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M616 128 714 157Q724 160 724 178V762Q724 780 711 783L616 815" stroke-width="14"/>
+    <rect x="361" y="354" width="160" height="244" rx="13" stroke-width="18"/>
+    <path d="M416 333h50v21" stroke-width="18"/>
+    <path d="M396 526h90M396 476h90M396 426h90" stroke-width="14"/>
+  </g>
+</svg>

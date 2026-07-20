@@ -25,7 +25,7 @@ class PixiiHomeDevice extends Homey.Device {
   }
 
   async ensureCapabilities() {
-    for (const capability of ['pixii_service_text', 'pixii_service_details', 'pixii_system_status_text', 'pixii_system_status_details', 'pixii_system_events']) {
+    for (const capability of ['meter_power.exported', 'pixii_service_text', 'pixii_service_details', 'pixii_system_status_text', 'pixii_system_status_details', 'pixii_system_events']) {
       if (!this.hasCapability(capability)) await this.addCapability(capability).catch(this.error);
     }
     for (const capability of ['pixii_service', 'pixii_system_status']) {
