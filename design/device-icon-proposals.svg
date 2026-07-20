@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 760" role="img" aria-labelledby="title desc">
+  <title id="title">Tre förslag på enhetsikon för Pixii Home</title>
+  <desc id="desc">Tre vita linjeikoner på mörk bakgrund. Skåpet är vinklat åt höger med vänstersidan synlig och har en batterisymbol på fronten.</desc>
+
+  <rect width="1920" height="760" rx="48" fill="#202326"/>
+
+  <!-- A: Produktnära -->
+  <g transform="translate(40 20) scale(.72)" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M315 165 765 215v598l-450-28Z"/>
+    <path d="m165 230 150-65v620l-150-58Z"/>
+    <path d="m165 230 150-65 450 50-152 61Z"/>
+    <path d="M315 735 765 763v50l-450-28Z" fill="#fff" stroke="none"/>
+    <path d="M165 680 315 735v50l-150-58Z" fill="#fff" stroke="none"/>
+    <path d="M420 330 625 347v260l-205-14Z"/>
+    <path d="m493 323 66 6v17"/>
+    <path d="m464 528 116 8M464 474l116 9M464 420l116 9"/>
+    <path d="m205 350 72-27M205 405l72-27M205 600l72-27M205 655l72-27"/>
+  </g>
+
+  <!-- B: Ren och Homey-vänlig -->
+  <g transform="translate(680 20) scale(.72)" fill="none" stroke="#fff" stroke-width="36" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M315 165 765 215v598l-450-28Z"/>
+    <path d="m165 230 150-65v620l-150-58Z"/>
+    <path d="m165 230 150-65 450 50-150 61Z"/>
+    <path d="M315 715 765 743v70l-450-28Z" fill="#fff" stroke="none"/>
+    <path d="M165 660 315 715v70l-150-58Z" fill="#fff" stroke="none"/>
+    <path d="M426 342 632 359v246l-206-14Z"/>
+    <path d="m501 335 64 6v16"/>
+    <path d="m470 527 118 9M470 468l118 9M470 409l118 9"/>
+  </g>
+
+  <!-- C: Kompakt symbol -->
+  <g transform="translate(1320 20) scale(.72)" fill="none" stroke="#fff" stroke-width="42" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M315 165 765 215v598l-450-28Z"/>
+    <path d="m165 230 150-65v620l-150-58Z"/>
+    <path d="m165 230 150-65 450 50-150 61Z"/>
+    <path d="M315 700 765 728v85l-450-28Z" fill="#fff" stroke="none"/>
+    <path d="M165 645 315 700v85l-150-58Z" fill="#fff" stroke="none"/>
+    <path d="M420 343 640 361v242l-220-15Z"/>
+    <path d="m495 336 72 6v17"/>
+    <path d="m465 515 130 10M465 446l130 10"/>
+  </g>
+
+  <g fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="320" y="710" font-size="32" font-weight="700">A · Produktnära</text>
+    <text x="960" y="710" font-size="32" font-weight="700">B · Ren</text>
+    <text x="1600" y="710" font-size="32" font-weight="700">C · Kompakt</text>
+  </g>
+</svg>

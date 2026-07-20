@@ -1,0 +1,21 @@
+{
+  "name": "com.pixii.home",
+  "version": "0.6.3",
+  "description": "Homey Pro integration for Pixii Home over MQTT",
+  "main": "app.js",
+  "scripts": {
+    "lint": "homey app validate",
+    "build": "homey app build",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "mqtt": "^5.10.4"
+  },
+  "devDependencies": {
+    "homey": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

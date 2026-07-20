@@ -1,0 +1,1 @@
+{ "type": "string", "title": { "en": "Last command response", "sv": "Senaste kommandosvar" }, "getable": true, "setable": false, "insights": false, "icon": "/assets/capabilities/ack.svg" }

@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "title": { "en": "System events", "sv": "Systemhändelser" },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "icon": "/assets/capabilities/system-status.svg"
+}

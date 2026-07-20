@@ -1,0 +1,18 @@
+{
+  "pair": {
+    "title": "Connect Pixii Home",
+    "intro": "Enter the MQTT broker details configured in the Pixii gateway.",
+    "broker": "Broker address",
+    "port": "Port",
+    "username": "Username",
+    "password": "Password",
+    "serial": "Gateway serial number",
+    "tls": "Use TLS",
+    "connect": "Connect",
+    "missing": "Broker address and serial number are required"
+  },
+  "errors": {
+    "offline": "MQTT broker is offline",
+    "ack": "Pixii rejected the command: __message__"
+  }
+}

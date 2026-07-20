@@ -1,0 +1,1 @@
+{ "type": "string", "title": { "en": "Active service", "sv": "Aktiv tjänst" }, "getable": true, "setable": false, "insights": false, "icon": "/assets/capabilities/service.svg" }

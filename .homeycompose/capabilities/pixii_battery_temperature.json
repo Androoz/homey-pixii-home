@@ -1,0 +1,1 @@
+{ "type": "number", "title": { "en": "Battery temperature", "sv": "Batteritemperatur" }, "units": { "en": "°C", "sv": "°C" }, "decimals": 1, "getable": true, "setable": false, "insights": true, "icon": "/assets/capabilities/temperature.svg" }

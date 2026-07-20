@@ -1,0 +1,18 @@
+{
+  "pair": {
+    "title": "Anslut Pixii Home",
+    "intro": "Ange MQTT-brokern som är konfigurerad i Pixii Gateway.",
+    "broker": "Brokeradress",
+    "port": "Port",
+    "username": "Användarnamn",
+    "password": "Lösenord",
+    "serial": "Gateway-serienummer",
+    "tls": "Använd TLS",
+    "connect": "Anslut",
+    "missing": "Brokeradress och serienummer krävs"
+  },
+  "errors": {
+    "offline": "MQTT-brokern är frånkopplad",
+    "ack": "Pixii avvisade kommandot: __message__"
+  }
+}
