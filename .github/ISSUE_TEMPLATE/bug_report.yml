@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a reproducible problem with the Pixii Home community app
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is an independent community integration, not an official Pixii or Athom support channel. Never include MQTT passwords, private certificates or unredacted diagnostics.
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      placeholder: 0.6.6
+    validations:
+      required: true
+  - type: input
+    id: homey-version
+    attributes:
+      label: Homey Pro model and software version
+    validations:
+      required: true
+  - type: input
+    id: gateway-version
+    attributes:
+      label: Pixii Gateway software version
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Run Flow ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Relevant redacted diagnostics
+      description: Remove credentials, certificates, public IP addresses and other private information before submitting.
+      render: shell

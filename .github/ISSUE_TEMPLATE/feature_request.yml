@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest an improvement for the Pixii Home community app
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: This is an independent community integration, not an official Pixii or Athom support channel.
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Describe the energy-management goal or problem, not only the requested implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Relevant Pixii documentation or MQTT example
+      description: Remove credentials and private system information.

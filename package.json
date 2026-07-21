@@ -1,6 +1,6 @@
 {
   "name": "com.pixii.home",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Homey Pro integration for Pixii Home over MQTT",
   "main": "app.js",
   "scripts": {

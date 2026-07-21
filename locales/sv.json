@@ -13,6 +13,10 @@
   },
   "errors": {
     "offline": "MQTT-brokern är frånkopplad",
-    "ack": "Pixii avvisade kommandot: __message__"
+    "auth_rejected": "MQTT-inloggningen avvisades. Kontrollera användarnamn och lösenord i avancerade inställningar.",
+    "ack": "Pixii avvisade kommandot: __message__",
+    "ack_timeout": "Tidsgränsen överskreds i väntan på svar från Pixii",
+    "status_timeout": "Ingen aktuell status har tagits emot från Pixii",
+    "soc_limits": "Det råa SoC-värdet som visas som 100 % måste vara högre än värdet som visas som 0 %."
   }
 }

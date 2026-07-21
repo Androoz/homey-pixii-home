@@ -2,6 +2,11 @@
 
 Local Homey SDK v3 integration for Pixii Home through MQTT.
 
+This is an independent community integration and is not an official Pixii or
+Athom product. For support, feedback and bug reports, use
+[GitHub Issues](https://github.com/Androoz/homey-pixii-home/issues). See the
+[privacy notice](PRIVACY.md) for how connection data is handled.
+
 ## Included
 
 - One complete Pixii Home battery device
@@ -48,7 +53,7 @@ cards are deprecated and retained only so existing Flows continue to work.
 Use the action **Follow grid power for dynamic charging** and drop the current
 Grid power tag into the card. A value of `-2500 W` produces a `+2500 W` Pixii
 charging request. Zero, import, or export inside the configured deadband produces
-a `0 W` request. The card has no duration argument: every incoming house-power
+a `0 W` request. The card has no duration argument: every incoming grid-power
 trigger renews a short safety lease configured in the device's Advanced Settings.
 Grid power is deliberately used instead of House power because House power may
 already include the Pixii battery's own charging or discharging contribution.

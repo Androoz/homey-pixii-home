@@ -13,6 +13,10 @@
   },
   "errors": {
     "offline": "MQTT broker is offline",
-    "ack": "Pixii rejected the command: __message__"
+    "auth_rejected": "MQTT login was rejected. Check the username and password in Advanced Settings.",
+    "ack": "Pixii rejected the command: __message__",
+    "ack_timeout": "Timed out while waiting for a response from Pixii",
+    "status_timeout": "No recent status has been received from Pixii",
+    "soc_limits": "The raw SoC value shown as 100% must be higher than the value shown as 0%."
   }
 }
