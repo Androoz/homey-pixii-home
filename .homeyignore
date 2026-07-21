@@ -1,0 +1,10 @@
+.git/
+.github/
+design/
+docs/
+test/
+.homeybuild/
+README.md
+PRIVACY.md
+SUPPORT.md
+npm-debug.log*

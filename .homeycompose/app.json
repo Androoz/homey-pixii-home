@@ -1,14 +1,14 @@
 {
   "id": "com.pixii.home",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "compatibility": ">=12.3.0",
   "sdk": 3,
   "runtime": "nodejs",
   "platforms": ["local"],
   "name": { "en": "Pixii Home", "sv": "Pixii Home" },
   "description": {
-    "en": "Local MQTT integration for Pixii Home battery systems.",
-    "sv": "Lokal MQTT-integration för Pixii Home-batterisystem."
+    "en": "Make your home battery part of a smarter energy system.",
+    "sv": "Gör ditt hembatteri till en del av ett smartare energisystem."
   },
   "category": "energy",
   "brandColor": "#000000",

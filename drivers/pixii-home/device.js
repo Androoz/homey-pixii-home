@@ -6,11 +6,17 @@ const { defaultCommandTopic } = require('../../lib/pixii-mqtt');
 const { mapPayload } = require('../../lib/pixii-mapping');
 const { calculateDynamicChargePower, calculateDynamicDischargePower } = require('../../lib/power-control');
 const { calculateDisplayedSoc, getSystemStatusInfo, getServiceInfo, getSystemEventsText } = require('../../lib/pixii-values');
+const { SerializedAckQueue } = require('../../lib/serialized-ack-queue');
 
 class PixiiHomeDevice extends Homey.Device {
   async onInit() {
     this.lastStatusAt = 0;
-    this.ackWaiters = [];
+    this.commandQueue = new SerializedAckQueue({
+      publish: payload => this.publishService(payload),
+      setTimer: (callback, timeout) => this.homey.setTimeout(callback, timeout),
+      clearTimer: timer => this.homey.clearTimeout(timer),
+      timeoutError: () => new Error(this.homey.__('errors.ack_timeout'))
+    });
     await this.ensureCapabilities();
     const settings = this.getSettings();
     const serial = settings.serial || this.getData().id;
@@ -55,6 +61,7 @@ class PixiiHomeDevice extends Homey.Device {
       this.mqttWasConnected = true;
     });
     this.mqtt.on('disconnect', async () => {
+      this.commandQueue.cancel(new Error(this.homey.__('errors.offline')));
       await this.setCapabilityValue('pixii_mqtt_connected', false).catch(this.error);
       if (this.mqttWasConnected === true) {
         await this.homey.flow.getDeviceTriggerCard('mqtt_connection_lost').trigger(this, {}, {}).catch(this.error);
@@ -72,7 +79,7 @@ class PixiiHomeDevice extends Homey.Device {
     const authRejected = Number(err?.code) === 5 || /not authorized/i.test(err?.message || '');
     if (authRejected) {
       await this.setCapabilityValue('pixii_mqtt_connected', false).catch(this.error);
-      await this.setUnavailable('MQTT-inloggningen avvisades. Kontrollera användarnamn och lösenord i avancerade inställningar.').catch(this.error);
+      await this.setUnavailable(this.homey.__('errors.auth_rejected')).catch(this.error);
     }
   }
 
@@ -152,30 +159,29 @@ class PixiiHomeDevice extends Homey.Device {
     const success = Number(payload.response) === 65535 || payload.response_msg === 'success' || payload.response_text === 'success';
     const message = payload.response_msg || payload.response_text || JSON.stringify(payload);
     await this.setCapabilityValue('pixii_last_ack', message).catch(this.error);
-    const waiter = this.ackWaiters.shift();
-    if (waiter) success ? waiter.resolve(payload) : waiter.reject(new Error(message));
+    const matched = this.commandQueue.handleAck(
+      payload,
+      success ? null : new Error(this.homey.__('errors.ack', { message }))
+    );
+    if (!matched && this.commandQueue.pending) {
+      this.log(`Ignored unrelated Pixii ACK while waiting for ${this.commandQueue.pending.command.service || this.commandQueue.pending.command.mode || 'command'}`);
+    }
     const card = this.homey.flow.getDeviceTriggerCard(success ? 'command_succeeded' : 'command_failed');
     await card.trigger(this, { service: payload.service || '', message }, {}).catch(this.error);
   }
 
   async sendService(payload, waitForAck = true) {
-    let ackPromise;
-    if (waitForAck) {
-      ackPromise = new Promise((resolve, reject) => {
-        const waiter = { resolve, reject };
-        this.ackWaiters.push(waiter);
-        waiter.timer = this.homey.setTimeout(() => {
-          const index = this.ackWaiters.indexOf(waiter);
-          if (index >= 0) this.ackWaiters.splice(index, 1);
-          reject(new Error('Timed out waiting for Pixii ACK'));
-        }, 10000);
-        const wrap = fn => value => { this.homey.clearTimeout(waiter.timer); fn(value); };
-        waiter.resolve = wrap(resolve);
-        waiter.reject = wrap(reject);
-      });
+    return this.commandQueue.enqueue(payload, waitForAck);
+  }
+
+  async publishService(payload) {
+    if (!this.isMqttConnected()) throw new Error(this.homey.__('errors.offline'));
+    try {
+      await this.mqtt.publish(payload);
+    } catch (error) {
+      if (error?.code === 'MQTT_OFFLINE') throw new Error(this.homey.__('errors.offline'));
+      throw error;
     }
-    await this.mqtt.publish(payload);
-    return ackPromise;
   }
 
   setDemandResponse(power, duration) {
@@ -263,14 +269,12 @@ class PixiiHomeDevice extends Homey.Device {
 
   async checkAvailability() {
     const timeout = (Number(this.getSetting('availability_timeout')) || 120) * 1000;
-    if (this.lastStatusAt && Date.now() - this.lastStatusAt > timeout) await this.setUnavailable('No recent Pixii status received').catch(this.error);
+    if (this.lastStatusAt && Date.now() - this.lastStatusAt > timeout) await this.setUnavailable(this.homey.__('errors.status_timeout')).catch(this.error);
   }
 
   async onSettings({ newSettings, changedKeys }) {
     if (newSettings.soc_custom_limits === true && Number(newSettings.soc_custom_max) <= Number(newSettings.soc_custom_min)) {
-      throw new Error(this.homey.i18n.getLanguage() === 'sv'
-        ? 'SoC-gränsen för 100 % måste vara högre än gränsen för 0 %.'
-        : 'The 100% SoC limit must be higher than the 0% limit.');
+      throw new Error(this.homey.__('errors.soc_limits'));
     }
     if (changedKeys.some(key => ['host', 'port', 'username', 'password', 'serial', 'tls', 'reject_unauthorized', 'command_topic'].includes(key))) {
       // onSettings is called before Homey has persisted the values, therefore
@@ -281,6 +285,7 @@ class PixiiHomeDevice extends Homey.Device {
 
   async onDeleted() {
     if (this.availabilityTimer) this.homey.clearInterval(this.availabilityTimer);
+    this.commandQueue.cancel(new Error(this.homey.__('errors.offline')));
     this.mqtt?.destroy();
   }
 }
