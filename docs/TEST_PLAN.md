@@ -8,6 +8,7 @@ Use this plan for the Athom Test release before submitting the app for certifica
 - Add a Pixii Home device using valid non-TLS MQTT settings.
 - Confirm that all pairing fields have equal width and only one TLS checkbox is shown.
 - Confirm that the default command topic is `pixii/<serial>/control`.
+- Confirm the pairing text recommends Broker 2 for an external integration and warns against multiple control publishers.
 - Verify that the device becomes available and receives battery, grid, house, energy, status and event values.
 - Repeat pairing with an incorrect password and confirm that the localized authentication error is understandable.
 - Correct the password in Advanced Settings and confirm automatic recovery without removing the device.
@@ -42,6 +43,9 @@ Use this plan for the Athom Test release before submitting the app for certifica
 
 ## 5. Dynamic grid balancing
 
+- Feed the Grid power tag into the combined Balance grid power action and verify bidirectional control toward a `+100 W` target.
+- Verify charge-only and discharge-only modes never request power in the opposite direction.
+- Generate grid updates faster than ACK responses and verify only the latest waiting dynamic update is eventually published.
 - Feed the Grid power tag into dynamic charging on every grid-power update.
 - Create controlled export and verify the requested charging power approaches zero grid power without exceeding the configured maximum.
 - Verify the deadband prevents rapid corrections around zero.
@@ -49,12 +53,15 @@ Use this plan for the Athom Test release before submitting the app for certifica
 - Repeat for positive import and dynamic discharging.
 - Test transitions directly from export to import and from import to export.
 - Confirm no oscillation develops when Pixii battery power affects the grid measurement.
+- Confirm the two direction-limited cards are not combined on the same trigger.
 
 ## 6. Reliability and concurrency
 
 - Trigger two different control actions almost simultaneously and verify each Flow receives the correct ACK result.
 - Run dynamic control for at least two hours and verify MQTT reconnection, memory use and command handling.
 - Restart the MQTT broker during an active control lease and verify safe expiry and recovery.
+- Disconnect MQTT with one active and several waiting commands and verify no queued command is published after reconnection.
+- If Broker 1 and Broker 2 are available, verify that a second controller can replace Homey's command, then remove that controller and confirm stable operation.
 - Change broker address, credentials, TLS and command topic one at a time and verify reconnection.
 - Leave the battery connected for at least 24 hours and review the app log for uncaught errors.
 

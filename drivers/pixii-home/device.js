@@ -4,7 +4,7 @@ const Homey = require('homey');
 const PixiiMqtt = require('../../lib/pixii-mqtt');
 const { defaultCommandTopic } = require('../../lib/pixii-mqtt');
 const { mapPayload } = require('../../lib/pixii-mapping');
-const { calculateDynamicChargePower, calculateDynamicDischargePower } = require('../../lib/power-control');
+const { calculateDynamicChargePower, calculateDynamicDischargePower, calculateDynamicBalancePower } = require('../../lib/power-control');
 const { calculateDisplayedSoc, getSystemStatusInfo, getServiceInfo, getSystemEventsText } = require('../../lib/pixii-values');
 const { SerializedAckQueue } = require('../../lib/serialized-ack-queue');
 
@@ -40,6 +40,7 @@ class PixiiHomeDevice extends Homey.Device {
   }
 
   connectMqtt(settings) {
+    this.commandQueue?.cancel(new Error(this.homey.__('errors.connection_changed')));
     this.mqtt?.destroy();
     const s = settings || this.getSettings();
     this.mqtt = new PixiiMqtt({
@@ -166,16 +167,21 @@ class PixiiHomeDevice extends Homey.Device {
     if (!matched && this.commandQueue.pending) {
       this.log(`Ignored unrelated Pixii ACK while waiting for ${this.commandQueue.pending.command.service || this.commandQueue.pending.command.mode || 'command'}`);
     }
-    const card = this.homey.flow.getDeviceTriggerCard(success ? 'command_succeeded' : 'command_failed');
-    await card.trigger(this, { service: payload.service || '', message }, {}).catch(this.error);
+    if (matched) {
+      const card = this.homey.flow.getDeviceTriggerCard(success ? 'command_succeeded' : 'command_failed');
+      await card.trigger(this, { service: payload.service || '', message }, {}).catch(this.error);
+    }
   }
 
-  async sendService(payload, waitForAck = true) {
+  async sendService(payload, waitForAck = true, replaceKey = null) {
+    if (replaceKey) return this.commandQueue.enqueueLatest(payload, replaceKey, waitForAck);
     return this.commandQueue.enqueue(payload, waitForAck);
   }
 
   async publishService(payload) {
     if (!this.isMqttConnected()) throw new Error(this.homey.__('errors.offline'));
+    this.commandSequence = (this.commandSequence || 0) + 1;
+    this.log(`MQTT command #${this.commandSequence} -> ${this.mqtt.getCommandTopic()}: ${JSON.stringify(payload)}`);
     try {
       await this.mqtt.publish(payload);
     } catch (error) {
@@ -186,6 +192,14 @@ class PixiiHomeDevice extends Homey.Device {
 
   setDemandResponse(power, duration) {
     return this.sendService({ service: 'demandresponse', method: 'set', values: { pacref: Number(power) }, starttime: 'now', duration: Number(duration) });
+  }
+
+  setLatestDynamicDemandResponse(power, duration) {
+    return this.sendService(
+      { service: 'demandresponse', method: 'set', values: { pacref: Number(power) }, starttime: 'now', duration: Number(duration) },
+      true,
+      'dynamic-grid-balance'
+    );
   }
 
   chargeBattery(power, durationMinutes) {
@@ -201,17 +215,17 @@ class PixiiHomeDevice extends Homey.Device {
   }
 
   stopCharging() {
-    this.dynamicChargePower = 0;
-    this.dynamicChargeUpdatedAt = 0;
+    this.dynamicBatteryPower = 0;
+    this.dynamicPowerUpdatedAt = 0;
     const leaseSeconds = Number(this.getSetting('dynamic_charge_lease')) || 300;
-    return this.setDemandResponse(0, leaseSeconds);
+    return this.setLatestDynamicDemandResponse(0, leaseSeconds);
   }
 
   stopDischarging() {
-    this.dynamicDischargePower = 0;
-    this.dynamicDischargeUpdatedAt = 0;
+    this.dynamicBatteryPower = 0;
+    this.dynamicPowerUpdatedAt = 0;
     const leaseSeconds = Number(this.getSetting('dynamic_discharge_lease')) || 300;
-    return this.setDemandResponse(0, leaseSeconds);
+    return this.setLatestDynamicDemandResponse(0, leaseSeconds);
   }
 
   chargeToSoc(soc) {
@@ -223,13 +237,13 @@ class PixiiHomeDevice extends Homey.Device {
     const deadband = Number(this.getSetting('dynamic_charge_deadband')) || 100;
     const leaseSeconds = Number(this.getSetting('dynamic_charge_lease')) || 300;
     const now = Date.now();
-    const currentPower = this.dynamicChargeUpdatedAt && now - this.dynamicChargeUpdatedAt <= leaseSeconds * 1000
-      ? this.dynamicChargePower || 0
+    const currentPower = this.dynamicPowerUpdatedAt && now - this.dynamicPowerUpdatedAt <= leaseSeconds * 1000
+      ? Math.max(0, this.dynamicBatteryPower || 0)
       : 0;
     const chargePower = calculateDynamicChargePower(gridPower, currentPower, maxChargePower, deadband);
-    this.dynamicChargePower = chargePower;
-    this.dynamicChargeUpdatedAt = now;
-    return this.setDemandResponse(chargePower, leaseSeconds);
+    this.dynamicBatteryPower = chargePower;
+    this.dynamicPowerUpdatedAt = now;
+    return this.setLatestDynamicDemandResponse(chargePower, leaseSeconds);
   }
 
   dynamicDischargeFromGridPower(gridPower) {
@@ -237,13 +251,36 @@ class PixiiHomeDevice extends Homey.Device {
     const deadband = Number(this.getSetting('dynamic_discharge_deadband')) || 100;
     const leaseSeconds = Number(this.getSetting('dynamic_discharge_lease')) || 300;
     const now = Date.now();
-    const currentPower = this.dynamicDischargeUpdatedAt && now - this.dynamicDischargeUpdatedAt <= leaseSeconds * 1000
-      ? this.dynamicDischargePower || 0
+    const currentPower = this.dynamicPowerUpdatedAt && now - this.dynamicPowerUpdatedAt <= leaseSeconds * 1000
+      ? Math.min(0, this.dynamicBatteryPower || 0)
       : 0;
     const dischargePower = calculateDynamicDischargePower(gridPower, currentPower, maxDischargePower, deadband);
-    this.dynamicDischargePower = dischargePower;
-    this.dynamicDischargeUpdatedAt = now;
-    return this.setDemandResponse(dischargePower, leaseSeconds);
+    this.dynamicBatteryPower = dischargePower;
+    this.dynamicPowerUpdatedAt = now;
+    return this.setLatestDynamicDemandResponse(dischargePower, leaseSeconds);
+  }
+
+  dynamicBalanceFromGridPower(gridPower, targetGridPower, mode) {
+    const maxChargePower = Number(this.getSetting('dynamic_charge_max')) || 10000;
+    const maxDischargePower = Number(this.getSetting('dynamic_discharge_max')) || 10000;
+    const deadband = Number(this.getSetting('dynamic_balance_deadband')) || 100;
+    const leaseSeconds = Number(this.getSetting('dynamic_balance_lease')) || 300;
+    const now = Date.now();
+    const currentPower = this.dynamicPowerUpdatedAt && now - this.dynamicPowerUpdatedAt <= leaseSeconds * 1000
+      ? this.dynamicBatteryPower || 0
+      : 0;
+    const requestedPower = calculateDynamicBalancePower(
+      gridPower,
+      currentPower,
+      targetGridPower,
+      maxChargePower,
+      maxDischargePower,
+      deadband,
+      mode
+    );
+    this.dynamicBatteryPower = requestedPower;
+    this.dynamicPowerUpdatedAt = now;
+    return this.setLatestDynamicDemandResponse(requestedPower, leaseSeconds);
   }
 
   setTargetSoc(soc, duration) {

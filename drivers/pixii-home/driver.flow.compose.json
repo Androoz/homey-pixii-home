@@ -80,6 +80,29 @@
   ],
   "actions": [
     {
+      "id": "balance_grid_power",
+      "title": { "en": "Balance grid power [[grid_power]] W toward [[target]] W using [[mode]]", "sv": "Balansera näteffekt [[grid_power]] W mot [[target]] W med [[mode]]" },
+      "titleFormatted": { "en": "Balance grid power [[grid_power]] W toward [[target]] W using [[mode]]", "sv": "Balansera näteffekt [[grid_power]] W mot [[target]] W med [[mode]]" },
+      "hint": {
+        "en": "Recommended for dynamic control. Use the Grid power Flow tag and trigger on every update. A small positive target such as 100 W reduces oscillation and unintended export. Choose bidirectional, charge only, or discharge only according to your energy policy.",
+        "sv": "Rekommenderas för dynamisk styrning. Använd Flow-taggen Näteffekt och trigga vid varje uppdatering. Ett litet positivt mål, exempelvis 100 W, minskar pendling och oavsiktlig export. Välj dubbelriktad, endast laddning eller endast urladdning efter din energipolicy."
+      },
+      "args": [
+        { "name": "grid_power", "type": "number", "title": { "en": "Current grid power (W)", "sv": "Aktuell näteffekt (W)" } },
+        { "name": "target", "type": "number", "title": { "en": "Target grid power (W)", "sv": "Målvärde för näteffekt (W)" }, "min": -100000, "max": 100000, "step": 50 },
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "title": { "en": "Balancing direction", "sv": "Balanseringsriktning" },
+          "values": [
+            { "id": "bidirectional", "title": { "en": "Charge and discharge", "sv": "Ladda och ladda ur" } },
+            { "id": "charge_only", "title": { "en": "Charge only", "sv": "Endast laddning" } },
+            { "id": "discharge_only", "title": { "en": "Discharge only", "sv": "Endast urladdning" } }
+          ]
+        }
+      ]
+    },
+    {
       "id": "stop_charging",
       "title": { "en": "Stop charging", "sv": "Stoppa laddning" },
       "titleFormatted": { "en": "Stop charging", "sv": "Stoppa laddning" },
@@ -96,8 +119,8 @@
       "title": { "en": "Follow grid power [[grid_power]] W for dynamic charging", "sv": "Följ näteffekt [[grid_power]] W för dynamisk laddning" },
       "titleFormatted": { "en": "Follow grid power [[grid_power]] W for dynamic charging", "sv": "Följ näteffekt [[grid_power]] W för dynamisk laddning" },
       "hint": {
-        "en": "Use the Grid power Flow tag. A negative value is export and becomes an equally large positive charging command. At zero or import, charging is stopped. Trigger this card whenever grid power updates.",
-        "sv": "Använd Flow-taggen Näteffekt. Ett negativt värde är export och blir ett lika stort positivt laddkommando. Vid noll eller import stoppas laddningen. Trigga kortet varje gång näteffekten uppdateras."
+        "en": "Direction-limited alternative for surplus capture. Use this card when the battery may charge from export but must never discharge automatically. Do not combine it with the separate dynamic discharging card on the same trigger; use Balance grid power instead.",
+        "sv": "Riktningsbegränsat alternativ för att fånga överskott. Använd kortet när batteriet får laddas från export men aldrig laddas ur automatiskt. Kombinera det inte med det separata dynamiska urladdningskortet på samma trigger; använd Balansera näteffekt i stället."
       },
       "args": [
         { "name": "grid_power", "type": "number", "title": { "en": "Grid power (W)", "sv": "Näteffekt (W)" } }
@@ -108,8 +131,8 @@
       "title": { "en": "Follow grid power [[grid_power]] W for dynamic discharging", "sv": "Följ näteffekt [[grid_power]] W för dynamisk urladdning" },
       "titleFormatted": { "en": "Follow grid power [[grid_power]] W for dynamic discharging", "sv": "Följ näteffekt [[grid_power]] W för dynamisk urladdning" },
       "hint": {
-        "en": "Use the Grid power Flow tag. A positive value is import and becomes an equally large negative discharging command, targeting approximately 0 W grid power. At zero or export, discharging is stopped. Trigger this card whenever grid power updates.",
-        "sv": "Använd Flow-taggen Näteffekt. Ett positivt värde är import och blir ett lika stort negativt urladdningskommando, med cirka 0 W näteffekt som mål. Vid noll eller export stoppas urladdningen. Trigga kortet varje gång näteffekten uppdateras."
+        "en": "Direction-limited alternative for import compensation or price-controlled discharge. Use this card when the battery may discharge but must never charge automatically. Do not combine it with the separate dynamic charging card on the same trigger; use Balance grid power instead.",
+        "sv": "Riktningsbegränsat alternativ för importkompensering eller prisstyrd urladdning. Använd kortet när batteriet får laddas ur men aldrig laddas automatiskt. Kombinera det inte med det separata dynamiska laddningskortet på samma trigger; använd Balansera näteffekt i stället."
       },
       "args": [
         { "name": "grid_power", "type": "number", "title": { "en": "Grid power (W)", "sv": "Näteffekt (W)" } }
