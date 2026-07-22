@@ -1,7 +1,7 @@
 {
   "pair": {
     "title": "Anslut Pixii Home",
-    "intro": "Ange MQTT-brokern som är konfigurerad i Pixii Gateway.",
+    "intro": "Ange MQTT-brokern som är konfigurerad i Pixii Gateway. Pixiis dokumentation använder Broker 2 för externa integrationer, och appen rekommenderar därför den i första hand. Endast ett system bör publicera styrkommandon.",
     "broker": "Brokeradress",
     "port": "Port",
     "username": "Användarnamn",
@@ -13,6 +13,7 @@
   },
   "errors": {
     "offline": "MQTT-brokern är frånkopplad",
+    "connection_changed": "MQTT-anslutningen ändrades innan kommandot slutfördes",
     "auth_rejected": "MQTT-inloggningen avvisades. Kontrollera användarnamn och lösenord i avancerade inställningar.",
     "ack": "Pixii avvisade kommandot: __message__",
     "ack_timeout": "Tidsgränsen överskreds i väntan på svar från Pixii",

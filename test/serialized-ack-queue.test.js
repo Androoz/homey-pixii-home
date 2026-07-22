@@ -60,3 +60,39 @@ test('times out a command and advances the queue', async () => {
   queue.handleAck({ service: 'targetsoc', method: 'set' });
   await second;
 });
+
+test('keeps only the latest waiting replaceable command', async () => {
+  const published = [];
+  const queue = new SerializedAckQueue({ publish: async command => published.push(command) });
+  const first = queue.enqueueLatest({ service: 'demandresponse', method: 'set', values: { pacref: 1000 } }, 'dynamic');
+  const replaced = queue.enqueueLatest({ service: 'demandresponse', method: 'set', values: { pacref: 2000 } }, 'dynamic');
+  const latest = queue.enqueueLatest({ service: 'demandresponse', method: 'set', values: { pacref: 3000 } }, 'dynamic');
+
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(published.length, 1);
+  assert.equal(published[0].values.pacref, 1000);
+  assert.deepEqual(await replaced, { superseded: true });
+
+  queue.handleAck({ service: 'demandresponse', method: 'set' });
+  await first;
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(published.length, 2);
+  assert.equal(published[1].values.pacref, 3000);
+  queue.handleAck({ service: 'demandresponse', method: 'set' });
+  await latest;
+});
+
+test('cancel rejects the active command and clears all waiting commands', async () => {
+  const published = [];
+  const queue = new SerializedAckQueue({ publish: async command => published.push(command) });
+  const first = queue.enqueue({ service: 'demandresponse', method: 'set' });
+  const second = queue.enqueue({ service: 'targetsoc', method: 'set' });
+
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(published.length, 1);
+  queue.cancel(new Error('connection changed'));
+  await assert.rejects(first, /connection changed/);
+  await assert.rejects(second, /connection changed/);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(published.length, 1);
+});

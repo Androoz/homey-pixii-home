@@ -17,5 +17,7 @@
   { "id": "dynamic_charge_lease", "type": "number", "label": { "en": "Dynamic command safety lease (seconds)", "sv": "Säkerhetstid för dynamiskt kommando (sekunder)" }, "value": 300, "min": 30, "max": 3600 },
   { "id": "dynamic_discharge_max", "type": "number", "label": { "en": "Maximum dynamic discharging power (W)", "sv": "Maximal dynamisk urladdningseffekt (W)" }, "value": 10000, "min": 100, "max": 100000 },
   { "id": "dynamic_discharge_deadband", "type": "number", "label": { "en": "Import deadband (W)", "sv": "Dödband för import (W)" }, "value": 100, "min": 0, "max": 5000 },
-  { "id": "dynamic_discharge_lease", "type": "number", "label": { "en": "Dynamic discharge safety lease (seconds)", "sv": "Säkerhetstid för dynamisk urladdning (sekunder)" }, "value": 300, "min": 30, "max": 3600 }
+  { "id": "dynamic_discharge_lease", "type": "number", "label": { "en": "Dynamic discharge safety lease (seconds)", "sv": "Säkerhetstid för dynamisk urladdning (sekunder)" }, "value": 300, "min": 30, "max": 3600 },
+  { "id": "dynamic_balance_deadband", "type": "number", "label": { "en": "Bidirectional balancing deadband (W)", "sv": "Dödband för dubbelriktad balansering (W)" }, "value": 100, "min": 0, "max": 5000 },
+  { "id": "dynamic_balance_lease", "type": "number", "label": { "en": "Bidirectional balancing safety lease (seconds)", "sv": "Säkerhetstid för dubbelriktad balansering (sekunder)" }, "value": 300, "min": 30, "max": 3600 }
 ]

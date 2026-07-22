@@ -1,6 +1,6 @@
 {
   "id": "com.pixii.home",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "compatibility": ">=12.3.0",
   "sdk": 3,
   "runtime": "nodejs",

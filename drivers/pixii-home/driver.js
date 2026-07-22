@@ -18,6 +18,7 @@ class PixiiHomeDriver extends Homey.Driver {
       charge_to_soc: ({ device, soc }) => device.chargeToSoc(soc),
       dynamic_charge_from_grid_power: ({ device, grid_power }) => device.dynamicChargeFromGridPower(grid_power),
       dynamic_discharge_from_grid_power: ({ device, grid_power }) => device.dynamicDischargeFromGridPower(grid_power),
+      balance_grid_power: ({ device, grid_power, target, mode }) => device.dynamicBalanceFromGridPower(grid_power, target, mode),
       demand_response: ({ device, power, duration }) => device.setDemandResponse(power, duration),
       target_soc: ({ device, soc, duration }) => device.setTargetSoc(soc, duration),
       power_control: ({ device, power, reactive, duration }) => device.setPowerControl(power, reactive, duration),

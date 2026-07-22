@@ -1,7 +1,7 @@
 {
   "pair": {
     "title": "Connect Pixii Home",
-    "intro": "Enter the MQTT broker details configured in the Pixii gateway.",
+    "intro": "Enter the MQTT broker details configured in the Pixii gateway. Pixii's documentation uses Broker 2 for external integrations, and this app recommends it as the first choice. Only one system should publish control commands.",
     "broker": "Broker address",
     "port": "Port",
     "username": "Username",
@@ -13,6 +13,7 @@
   },
   "errors": {
     "offline": "MQTT broker is offline",
+    "connection_changed": "The MQTT connection changed before the command completed",
     "auth_rejected": "MQTT login was rejected. Check the username and password in Advanced Settings.",
     "ack": "Pixii rejected the command: __message__",
     "ack_timeout": "Timed out while waiting for a response from Pixii",
