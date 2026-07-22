@@ -1,3 +1,4 @@
 node_modules/
 .homeybuild/
 npm-debug.log*
+.homeychangelog.json
